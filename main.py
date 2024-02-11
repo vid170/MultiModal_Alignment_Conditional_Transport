@@ -114,6 +114,11 @@ if __name__=='__main__':
                 loss=loss_fn(vit_outputs,bert_outputs,labels)
             elif(args.loss=="bce_loss"):
                 loss = nn.BCELoss()(logits,labels)
+            elif(args.loss="steady_loss"):
+                if(epoch<args.checkpoint):
+                    loss=nn.BCELoss()(logits,labels)
+                else:
+                    loss=nn.BCE()(logits,labels)+args.beta*loss_fn(vit_outputs,bert_outputs,labels)+nn.BCELoss()(logits,labels)
             else:
                 loss=args.beta*loss_fn(vit_outputs,bert_outputs,labels)+nn.BCELoss()(logits,labels)
 

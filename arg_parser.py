@@ -66,6 +66,13 @@ def parse_arguments():
         default="ct_bce",
         help="Regularization Parameter",
     )
+
+    parser.add_argument(
+        "--checkpoint",
+        type=int,
+        default=30,
+        help="Epoch after which regularization is started",
+    )
    
     args = parser.parse_args()
     return args
